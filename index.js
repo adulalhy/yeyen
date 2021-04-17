@@ -2424,16 +2424,15 @@ case 'ytmp3':
 if (isLimit(sender)) return reply(ind.limitend(pusname))
 	                if (args.length < 1) return reply('Kak masukin url/link yt lah...') 
 				    costum('[❗] LOADING!', text, tescuk, ari)
-anu = await fetchJson(`https://fzn-gaz.herokuapp.com/api/ytdlmp3?url=${args[0]}`, {method: 'get'})
-					anu1 = await getBuffer(anu.image)
-					anu2 = `➤ *JUDUL* : ${anu.title}\n`
-					anu2 += `➤ *SIZE* : ${anu.size}\n`
-					anu2 += `➤ *STATUS* : ${anu.status}\n`
-					anu2 += `➤ *SOUND SEDANG DIKIRIM*\n`
-					ara.sendMessage(from, anu1, image, {caption: anu2, quoted: mek})					
-					anu3 = await getBuffer(anu.result)
-					ara.sendMessage(from, anu3, audio, {mimetype: 'audio/mp4', filename: `${anu.title}.mp3`, quoted: mek})
-					break
+play = body.slice(7)
+                anu = await fetchJson(`https://fzn-gaz.herokuapp.com/api/ytplay2?judul=${play}`)
+               if (anu.error) return reply(anu.error)
+                 infomp3 = `╭─「 *TIMELINE PLAY MP3* 」\n│• *Judul:* ${anu.title}\n│• *Ukuran:* ${anu.size}\n│\n│*TUNGGU SEBENTAR LAGI DIKIRIM*\n│ *MOHON JANGAN SPAM YA BEB*\n╰─────────────────────`
+                buffer = await getBuffer(anu.image)
+                lagu = await getBuffer(anu.result.replace('fzn-gas','fzn-gaz'))
+                ara.sendMessage(from, buffer, image, {quoted: mek, caption: infomp3})
+                ara.sendMessage(from, lagu, audio, {mimetype: 'audio/mp4', filename: `${anu.title}.mp3`, quoted: mek})
+                break
         case 'ytmp4':
                     if (!isRegistered) return reply( ind.noregis())
                     if (isBanned) return reply('```Lu kebanned kontol```')
