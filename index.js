@@ -2430,7 +2430,7 @@ anu = await fetchJson(`https://fzn-gaz.herokuapp.com/api/ytdlmp3?url=${args[0]}`
 					anu2 += `➤ *SIZE* : ${anu.size}\n`
 					anu2 += `➤ *STATUS* : ${anu.status}\n`
 					anu2 += `➤ *SOUND SEDANG DIKIRIM*\n`
-					client.sendMessage(from, anu1, image, {caption: anu2, quoted: mek})					
+					ara.sendMessage(from, anu1, image, {caption: anu2, quoted: mek})					
 					anu3 = await getBuffer(anu.result)
 					ara.sendMessage(from, anu3, audio, {mimetype: 'audio/mp4', filename: `${anu.title}.mp3`, quoted: mek})
 					break
@@ -2440,17 +2440,19 @@ anu = await fetchJson(`https://fzn-gaz.herokuapp.com/api/ytdlmp3?url=${args[0]}`
                     if (args.length < 1) return reply('Kak masukin url/link yt lah...')
 					if(!isUrl(args[0]) && !args[0].includes('youtu')) return reply(ind.wrogf())
 				    costum('[❗] LOADING!', text, tescuk, ari)
-					anu = await fetchJson(`https://videfikri.com/api/ytmp4/?url=${args[0]}`, {method: 'get'})
-                    anu1 = await getBuffer(anu.result.imgUrl)
-                    anu2 = `➤ *JUDUL* : ${anu.result.judul}\n`
-                    anu2 += `➤ *ID* : ${anu.result.id}\n`
-                    anu2 += `➤ *LINK* : ${anu.result.source}\n`
-                    anu2 += `➤ *URL* : ${anu.result.urlVideo}\n`
-                    anu2 += `➤ *[❗] VIDEO SEDANG DIKIRIM*\n`
-                    ara.sendMessage(from, anu1, image, {caption: anu2, quoted: mek})
-                    anu3 = await getBuffer(anu.result.urlVideo)
-                    ara.sendMessage(from, anu3, video, {mimetype: 'video/mp4', quoted: mek})
-                    break 
+					anu = await fetchJson(`https://api.zeks.xyz/api/ytmp4?url=${play}&apikey=${viKey}`)
+  if(!isUrl(args[0]) && !args[0].includes('youtu')) return reply('Format link salah, gunakan link youtube')
+  if (anu.error) return reply(anu.error)
+  infomp3 = `*Video Ditemukan*\n‣ *Judul* : ${anu.result.title}\n‣ *Source* : ${anu.result.source}\n‣ *Ukuran* : ${anu.result.size}\n\n_Mengirim file silakan tunggu_\n\n_Jika video tidak muncul download sendiri menggunakan link dibawah_\n‣ *link* : ${anu.result.url_video}`
+  buffer = await getBuffer(anu.result.thumbnail)
+  lagu = await getBuffer(anu.result.url_video)
+  ara.sendMessage(from, buffer, image, {
+quoted: mek, caption: infomp3
+  })
+  ara.sendMessage(from, lagu, video, {
+mimetype: 'video/mp4', filename: `${anu.result.title}.mp4`, quoted: mek
+  })
+  break
 		case 'play':   
                     if (!isRegistered) return reply( ind.noregis())
 				    if (isLimit(sender)) return reply(ind.limitend(pusname))
