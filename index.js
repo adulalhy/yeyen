@@ -2440,7 +2440,8 @@ anu = await fetchJson(`https://fzn-gaz.herokuapp.com/api/ytdlmp3?url=${args[0]}`
                     if (args.length < 1) return reply('Kak masukin url/link yt lah...')
 					if(!isUrl(args[0]) && !args[0].includes('youtu')) return reply(ind.wrogf())
 				    costum('[❗] LOADING!', text, tescuk, ari)
-					anu = await fetchJson(`https://api.zeks.xyz/api/ytmp4?url=${play}&apikey=${viKey}`)
+play = body.slice(7) 
+					anu = await fetchJson(`https://api.zeks.xyz/api/ytmp4?url=${play}&apikey=apivinz`)
   if(!isUrl(args[0]) && !args[0].includes('youtu')) return reply('Format link salah, gunakan link youtube')
   if (anu.error) return reply(anu.error)
   infomp3 = `*Video Ditemukan*\n‣ *Judul* : ${anu.result.title}\n‣ *Source* : ${anu.result.source}\n‣ *Ukuran* : ${anu.result.size}\n\n_Mengirim file silakan tunggu_\n\n_Jika video tidak muncul download sendiri menggunakan link dibawah_\n‣ *link* : ${anu.result.url_video}`
