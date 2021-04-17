@@ -2680,12 +2680,8 @@ anu = await fetchJson(`https://fzn-gaz.herokuapp.com/api/ytdlmp3?url=${args[0]}`
 		case 'stikergif':
 	    case 'sgif':
 		case 'stiker': 
-		case 'sticker':
-		case 's':
-                if (!isRegistered) return reply( ind.noregis())
-				if (isLimit(sender)) return reply(ind.limitend(pusname))
-				if (isBanned) return reply('Maaf kamu sudah terbenned!')
-				await limitAdd(sender)
+				case 'sticker':
+				case 's':
 					if ((isMedia && !mek.message.videoMessage || isQuotedImage) && args.length == 0) {
 						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 						const media = await ara.downloadAndSaveMediaMessage(encmedia)
@@ -2698,19 +2694,14 @@ anu = await fetchJson(`https://fzn-gaz.herokuapp.com/api/ytdlmp3?url=${args[0]}`
 							.on('error', function (err) {
 								console.log(`Error : ${err}`)
 								fs.unlinkSync(media)
-								reply(ind.error)
+								reply(ind.stikga)
 							})
 							.on('end', function () {
 								console.log('Finish')
-								exec(`webpmux -set exif ${addMetadata('Yeyen', 'Yeyen Cangtip')} ${ran} -o ${ran}`, async (error) => {
-									if (error) return reply(ind.error)
-									ara.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
-									fs.unlinkSync(media)	
-									fs.unlinkSync(ran)	
-								})
-								/*ara.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
+								buff = fs.readFileSync(ran)
+								ara.sendMessage(from, buff, sticker, {quoted: mek})
 								fs.unlinkSync(media)
-								fs.unlinkSync(ran)*/
+								fs.unlinkSync(ran)
 							})
 							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
 							.toFormat('webp')
@@ -2719,7 +2710,7 @@ anu = await fetchJson(`https://fzn-gaz.herokuapp.com/api/ytdlmp3?url=${args[0]}`
 						const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 						const media = await ara.downloadAndSaveMediaMessage(encmedia)
 						ran = getRandom('.webp')
-						reply(ind.wait)
+						reply(mess.wait)
 						await ffmpeg(`./${media}`)
 							.inputFormat(media.split('.')[1])
 							.on('start', function (cmd) {
@@ -2729,19 +2720,14 @@ anu = await fetchJson(`https://fzn-gaz.herokuapp.com/api/ytdlmp3?url=${args[0]}`
 								console.log(`Error : ${err}`)
 								fs.unlinkSync(media)
 								tipe = media.endsWith('.mp4') ? 'video' : 'gif'
-								reply(`❌ Gagal, pada saat mengkonversi ${tipe} ke stiker`)
+								reply(`𝗬𝗮𝗵 𝗴𝗮𝗴𝗮𝗹, 𝘂𝗹𝗮𝗻𝗴𝗶 𝗹𝗮𝗴𝗶 𝘆𝗮 𝘀𝗮𝘆𝗮𝗻𝗴`)
 							})
 							.on('end', function () {
 								console.log('Finish')
-								exec(`webpmux -set exif ${addMetadata('Yeyen', 'Yeyen Cangtip')} ${ran} -o ${ran}`, async (error) => {
-									if (error) return reply(ind.error)
-									ara.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
-									fs.unlinkSync(media)
-									fs.unlinkSync(ran)
-								})
-								/*ara.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
+								buff = fs.readFileSync(ran)
+								ara.sendMessage(from, buff, sticker, {quoted: mek})
 								fs.unlinkSync(media)
-								fs.unlinkSync(ran)*/
+								fs.unlinkSync(ran)
 							})
 							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=white@0.0, split [a][b]; [a] palettegen=reserve_transparent=on:transparency_color=ffffff [p]; [b][p] paletteuse`])
 							.toFormat('webp')
@@ -2751,48 +2737,23 @@ anu = await fetchJson(`https://fzn-gaz.herokuapp.com/api/ytdlmp3?url=${args[0]}`
 						const media = await ara.downloadAndSaveMediaMessage(encmedia)
 						ranw = getRandom('.webp')
 						ranp = getRandom('.png')
-						reply(ind.wait)
+						reply(mess.wait)
 						keyrmbg = 'Your-ApiKey'
-						await removeBackgroundFromImageFile({path: media, apiKey: keyrmbg, size: 'auto', type: 'auto', ranp}).then(res => {
+						await removeBackgroundFromImageFile({path: media, apiKey: keyrmbg.result, size: 'auto', type: 'auto', ranp}).then(res => {
 							fs.unlinkSync(media)
 							let buffer = Buffer.from(res.base64img, 'base64')
 							fs.writeFileSync(ranp, buffer, (err) => {
-								if (err) return reply('Gagal, Terjadi kesalahan, silahkan coba beberapa saat lagi.')
+								if (err) return reply('𝗬𝗮𝗵 𝗴𝗮𝗴𝗮𝗹, 𝘂𝗹𝗮𝗻𝗴𝗶 𝗹𝗮𝗴𝗶 𝘆𝗮 𝘀𝗮𝘆𝗮𝗻𝗴')
 							})
 							exec(`ffmpeg -i ${ranp} -vcodec libwebp -filter:v fps=fps=20 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 512:512 ${ranw}`, (err) => {
 								fs.unlinkSync(ranp)
-								if (err) return reply(ind.error)
-								exec(`webpmux -set exif ${addMetadata('Yeyen', 'Yeyen Cangtip')} ${ranw} -o ${ranw}`, async (error) => {
-									if (error) return reply(ind.error.stick)
-									ara.sendMessage(from, fs.readFileSync(ranw), sticker, {quoted: mek})
-									fs.unlinkSync(ranw)
-								})
-								//ara.sendMessage(from, fs.readFileSync(ranw), sticker, {quoted: mek})
+								if (err) return reply(ind.stikga)
+								buff = fs.readFileSync(ranw)
+								ara.sendMessage(from, buff, sticker, {quoted: mek})
 							})
-						})
-					/*} else if ((isMedia || isQuotedImage) && colors.includes(args[0])) {
-						const encmedia = isQuotedImage ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
-						const media = await ara.downloadAndSaveMediaMessage(encmedia)
-						ran = getRandom('.webp')
-						await ffmpeg(`./${media}`)
-							.on('start', function (cmd) {
-								console.log('Started :', cmd)
-							})
-							.on('error', function (err) {
-								fs.unlinkSync(media)
-								console.log('Error :', err)
-							})
-							.on('end', function () {
-								console.log('Finish')
-								fs.unlinkSync(media)
-								ara.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
-								fs.unlinkSync(ran)
-							})
-							.addOutputOptions([`-vcodec`,`libwebp`,`-vf`,`scale='min(320,iw)':min'(320,ih)':force_original_aspect_ratio=decrease,fps=15, pad=320:320:-1:-1:color=${args[0]}@0.0, split [a][b]; [a] palettegen=reserve_transparent=off; [b][p] paletteuse`])
-							.toFormat('webp')
-							.save(ran)*/
+						})					
 					} else {
-						reply(`Kirim gambar dengan caption ${prefix}sticker atau tag gambar yang sudah dikirim`)
+						reply(`𝗸𝗶𝗿𝗶𝗺 𝗴𝗮𝗺𝗯𝗮𝗿 𝗱𝗲𝗻𝗴𝗮𝗻 𝗰𝗮𝗽𝘁𝗶𝗼𝗻 ${prefix}𝘀𝘁𝗶𝗰𝗸𝗲𝗿 𝗮𝘁𝗮𝘂 𝗿𝗲𝗽𝗹𝘆/𝘁𝗮𝗴 𝗴𝗮𝗺𝗯𝗮𝗿`)
 					}
 					break
 		case 'brainly':
