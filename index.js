@@ -2698,12 +2698,12 @@ anu = await fetchJson(`https://fzn-gaz.herokuapp.com/api/ytdlmp3?url=${args[0]}`
 							.on('error', function (err) {
 								console.log(`Error : ${err}`)
 								fs.unlinkSync(media)
-								reply(mess.error.stick)
+								reply(ind.error.stick)
 							})
 							.on('end', function () {
 								console.log('Finish')
 								exec(`webpmux -set exif ${addMetadata('Yeyen', 'Yeyen Cangtip')} ${ran} -o ${ran}`, async (error) => {
-									if (error) return reply(mess.error.stick)
+									if (error) return reply(ind.error.stick)
 									ara.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
 									fs.unlinkSync(media)	
 									fs.unlinkSync(ran)	
@@ -2734,7 +2734,7 @@ anu = await fetchJson(`https://fzn-gaz.herokuapp.com/api/ytdlmp3?url=${args[0]}`
 							.on('end', function () {
 								console.log('Finish')
 								exec(`webpmux -set exif ${addMetadata('Yeyen', 'Yeyen Cangtip')} ${ran} -o ${ran}`, async (error) => {
-									if (error) return reply(mess.error.stick)
+									if (error) return reply(ind.error.stick)
 									ara.sendMessage(from, fs.readFileSync(ran), sticker, {quoted: mek})
 									fs.unlinkSync(media)
 									fs.unlinkSync(ran)
@@ -2761,9 +2761,9 @@ anu = await fetchJson(`https://fzn-gaz.herokuapp.com/api/ytdlmp3?url=${args[0]}`
 							})
 							exec(`ffmpeg -i ${ranp} -vcodec libwebp -filter:v fps=fps=20 -lossless 1 -loop 0 -preset default -an -vsync 0 -s 512:512 ${ranw}`, (err) => {
 								fs.unlinkSync(ranp)
-								if (err) return reply(mess.error.stick)
+								if (err) return reply(ind.error.stick)
 								exec(`webpmux -set exif ${addMetadata('Yeyen', 'Yeyen Cangtip')} ${ranw} -o ${ranw}`, async (error) => {
-									if (error) return reply(mess.error.stick)
+									if (error) return reply(ind.error.stick)
 									ara.sendMessage(from, fs.readFileSync(ranw), sticker, {quoted: mek})
 									fs.unlinkSync(ranw)
 								})
