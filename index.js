@@ -2362,7 +2362,7 @@ ara.on('group-participants-update', async (anu) => {
  // CASE DOWNLOAD MENU //
 ////////////////////////
 
-        case 'ytmp3':
+        case 'ytmp31':
 					if (isLimit(sender)) return reply(ind.limitend(pusname))
 	                if (args.length < 1) return reply('Kak masukin url/link yt lah...') 
 				    costum('[❗] LOADING!', text, tescuk, ari)
@@ -2379,6 +2379,20 @@ ara.on('group-participants-update', async (anu) => {
 					anu3 = await getBuffer(anu.result.url)
 					ara.sendMessage(from, anu3, audio, {mimetype: 'audio/mp4', filename: `${anu.result.judul}.mp3`, quoted: mek})
 					break 
+case 'ytmp3':
+if (isLimit(sender)) return reply(ind.limitend(pusname))
+	                if (args.length < 1) return reply('Kak masukin url/link yt lah...') 
+				    costum('[❗] LOADING!', text, tescuk, ari)
+anu = await fetchJson(`https://fzn-gaz.herokuapp.com/api/ytdlmp3?url=${args[0]}`, {method: 'get'})
+					anu1 = await getBuffer(anu.image)
+					anu2 = `➤ *JUDUL* : ${anu.title}\n`
+					anu2 += `➤ *SIZE* : ${anu.size}\n`
+					anu2 += `➤ *STATUS* : ${anu.status}\n`
+					anu2 += `➤ *SOUND SEDANG DIKIRIM*\n`
+					client.sendMessage(from, anu1, image, {caption: anu2, quoted: mek})					
+					anu3 = await getBuffer(anu.result)
+					ara.sendMessage(from, anu3, audio, {mimetype: 'audio/mp4', filename: `${anu.title}.mp3`, quoted: mek})
+					break
         case 'ytmp4':
                     if (!isRegistered) return reply( ind.noregis())
                     if (isBanned) return reply('```Lu kebanned kontol```')
