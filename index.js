@@ -2540,7 +2540,7 @@ mimetype: 'video/mp4', filename: `${anu.result.title}.mp4`, quoted: mek
                 ara.sendMessage(from, pok, image, {quoted: mek, caption: `Gimana kak...?`
                 })
                 } catch {
-                reply(mess.ferr)
+                reply('Error Om')
                 }
                 break
         case 'cogan': 
@@ -2559,7 +2559,7 @@ mimetype: 'video/mp4', filename: `${anu.result.title}.mp4`, quoted: mek
                 quoted: mek, caption: `Gimana kak.....?`
                 })
                 } catch {
-                reply(mess.ferr)
+                reply('Error Om')
                 }
                 break
 		case 'pokemon':
@@ -2711,7 +2711,7 @@ mimetype: 'video/mp4', filename: `${anu.result.title}.mp4`, quoted: mek
 						const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo : mek
 						const media = await ara.downloadAndSaveMediaMessage(encmedia)
 						ran = getRandom('.webp')
-						reply(mess.wait)
+						reply(ind.wait)
 						await ffmpeg(`./${media}`)
 							.inputFormat(media.split('.')[1])
 							.on('start', function (cmd) {
@@ -2738,7 +2738,7 @@ mimetype: 'video/mp4', filename: `${anu.result.title}.mp4`, quoted: mek
 						const media = await ara.downloadAndSaveMediaMessage(encmedia)
 						ranw = getRandom('.webp')
 						ranp = getRandom('.png')
-						reply(mess.wait)
+						reply(ind.wait)
 						keyrmbg = 'Your-ApiKey'
 						await removeBackgroundFromImageFile({path: media, apiKey: keyrmbg.result, size: 'auto', type: 'auto', ranp}).then(res => {
 							fs.unlinkSync(media)
