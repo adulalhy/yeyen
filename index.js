@@ -1626,9 +1626,9 @@ ara.on('group-participants-update', async (anu) => {
 					ara.sendMessage(from, teks.trim(), extendedText, {quoted: mek, contextInfo: {"mentionedJid": blocked}})
 					break
         case 'linkgc':
-                    if (!isGroup) return reply(mess.only.group)
-                    if (!isGroupAdmins) return reply(mess.only.admin)
-                    if (!isBotGroupAdmins) return reply(mess.only.Badmin)
+                    if (!isGroup) return reply(ind.groupo)
+                    if (!isGroupAdmins) return reply(ind.admin)
+                    if (!isBotGroupAdmins) return reply(ind.badmin)
                     linkgc = await ara.groupInviteCode(from)
                     reply('https://chat.whatsapp.com/'+linkgc)
                     break
