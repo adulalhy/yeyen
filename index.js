@@ -3178,21 +3178,6 @@ mimetype: 'video/mp4', filename: `${anu.result.title}.mp4`, quoted: mek
 				   await limitAdd(sender)
 				   break
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             default:
 					if (budy.includes(`Salken`)) {
                   reply(`Salken juga om, Aku Bot Yeyen\nKetik .menu untuk melihat Menu Bot Yeyen`)
