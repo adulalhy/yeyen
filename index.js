@@ -168,9 +168,12 @@ const getLevelingXp = (sender) => {
             fs.writeFileSync('./database/bot/pengguna.json', JSON.stringify(_registered))
         }
 
-        const createSerial = (size) => {
-  return crypto.randomBytes(size).toString('hex').slice(0, size)
-}
+        const createSerial = size => {
+  return crypto
+    .randomBytes(size)
+    .toString("hex")
+    .slice(0, size);
+};
 
 
         const checkRegisteredUser = (sender) => {
