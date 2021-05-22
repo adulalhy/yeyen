@@ -2809,7 +2809,7 @@ mimetype: 'video/mp4', filename: `${anu.result.title}.mp4`, quoted: mek
 				if (isLimit(sender)) return reply(ind.limitend(pusname))
 				if (isBanned) return reply('Maaf kamu sudah terbenned!')
 				ara.updatePresence(from, Presence.composing) 
-				data = await fetchJson(`https://api.fdci.se/rep.php?gambar=${body.slice(11)}`, {method: 'get'})
+				data = await fetchJson(`https://fdciabdul.tech/api/pinterest?keyword=${body.slice(11)}`, {method: 'get'})
 				costum('[❗] LOADING!', text, tescuk, ari)
 				n = JSON.parse(JSON.stringify(data));
 				nimek =  n[Math.floor(Math.random() * n.length)];
