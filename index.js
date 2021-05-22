@@ -911,6 +911,7 @@ ara.on("CB:action,,call", async json => {
                 	if (namaUser.length >= 30) return reply(`why is your name so long it's a name or a train`)
                 	if (umurUser > 40) return reply(`your age is too  old maximum 40 years`)
                 	if (umurUser < 14) return reply(`your age is too young minimum 14 years`)
+			 fs.writeFileSync("./database/pengguna/user.json", JSON.stringify(user));
                 	try {
 					ppimg = await ara.getProfilePicture(`${sender.split('@')[0]}@c.us`)
 					} catch {
