@@ -943,7 +943,13 @@ ara.on("CB:action,,call", async json => {
 				    if (isBanned) return reply('Kamu terbanned!')
 					const reqXp  = 5000 * (Math.pow(2, getLevelingLevel(sender)) - 1)
 					const uangku = checkATMuser(sender)
-                    ppimg = fs.readFileSync(`./src/logo.jpg`)
+                    try {
+            ppimg = await ara.getProfilePicture(
+              `${sender.split("@")[0]}@s.whatsapp.net`
+            );
+          } catch {
+            ppimg = "https://i.ibb.co/Gp4H47k/7dba54f7e250.jpg";
+          }
                     teks = `
 ┏━━► *「 YOUR INFO 」* 
 ┃
